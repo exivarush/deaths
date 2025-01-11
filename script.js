@@ -102,23 +102,23 @@ const forbiddenGuilds = [
             return `<span style="color: ${color}; font-weight: bold;">Name: ${member.name} | ${vocationAbbreviation} - LVL: ${member.level}</span>`;
         }
 
-        async function fetchDeaths(member, listItem) {
-            const deathsDiv = document.createElement("ul");
+        async function fetchDeath(member, listItem) {
+            const deathDiv = document.createElement("ul");
             listItem.appendChild(deathsDiv);
 
             if (member.level > 250) {
                 const now = new Date();
                 const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
-                const recentDeaths = member.deaths.filter(death => new Date(death.time) >= twoDaysAgo);
+                const recentDeath = member.deaths.filter(death => new Date(death.time) >= twoDaysAgo);
 
                 if (recentDeaths.length > 0) {
-                    recentDeaths.forEach(deaths => {
-                        const deathsItem = document.createElement("li");
+                    recentDeaths.forEach(death => {
+                        const deathItem = document.createElement("li");
                         deathItem.innerHTML = `Motivo: ${death.reason}`;
                         deathsDiv.appendChild(deathItem);
                     });
                 } else {
-                    const noDeathsItem = document.createElement("li");
+                    const noDeathItem = document.createElement("li");
                     noDeathItem.textContent = "Nenhuma morte nas últimas 48 horas";
                     deathsDiv.appendChild(noDeathItem);
                 }
