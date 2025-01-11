@@ -109,20 +109,47 @@ const forbiddenGuilds = [
              } catch (error) { console.error("Erro:", error); alert("Não foi possível buscar os dados. Verifique o console para mais detalhes."); 
                              } 
             }
-            const deathDiv = document.createElement("ul");
-            listItem.appendChild(deathsDiv);
+            function processMembers(members) {
+    const resultList = document.getElementById("resultList");
 
-            if (member.level > 250) {
-                const now = new Date();
-                const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
-                const recentDeath = member.deaths.filter(death => new Date(death.time) >= twoDaysAgo);
+    members.forEach(member => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `Name: ${member.name} | Level: ${member.level}`;
+        resultList.appendChild(listItem);
 
-                if (recentDeaths.length > 0) {
-                    recentDeaths.forEach(death => {
-                        const deathItem = document.createElement("li");
-                        deathItem.innerHTML = `Motivo: ${death.reason}`;
-                        deathsDiv.appendChild(deathItem);
-                    });
+        fetchDeaths(member, listItem); // Passando `listItem` como argumento para `fetchDeaths`
+    });
+}
+
+function fetchDeaths(member, listItem) {
+    if (member.level > 250) {
+        const deathsDiv = document.createElement("ul");
+        listItem.appendChild(deathsDiv);
+
+        // Simulando dados de mortes
+        const deaths = [
+            { reason: "killed by a dragon", time: "2025-01-10T12:30:00Z" },
+            { reason: "killed by a troll", time: "2025-01-09T09:15:00Z" }
+        ];
+
+        const now = new Date();
+        const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
+        const recentDeaths = deaths.filter(death => new Date(death.time) >= twoDaysAgo);
+
+        if (recentDeaths.length > 0) {
+            recentDeaths.forEach(death => {
+                const deathItem = document.createElement("li");
+                deathItem.innerHTML = `Motivo: ${death.reason}`;
+                deathsDiv.appendChild(deathItem);
+            });
+        } else {
+            const noDeathItem = document.createElement("li");
+            noDeathItem.textContent = "Nenhuma morte nas últimas 48 horas";
+            deathsDiv.appendChild(noDeathItem);
+        }
+    }
+}
+
                 } else {
                     const noDeathItem = document.createElement("li");
                     noDeathItem.textContent = "Nenhuma morte nas últimas 48 horas";
