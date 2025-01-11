@@ -125,7 +125,7 @@ const forbiddenGuilds = [
                     deathsDiv.appendChild(noDeathItem);
                 }
             }
-        }
+        
 
         function createVocationList(vocationCount) {
             const colorMap = {
