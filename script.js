@@ -4,7 +4,8 @@ const forbiddenGuilds = [
             "Rasteibra Encore",
         ];
 
-        async function searchGuild() {
+        async function searchGuild() 
+            {
             const guildName = document.getElementById("guildName").value;
             const resultList = document.getElementById("resultList");
             resultList.innerHTML = "";
@@ -125,7 +126,7 @@ const forbiddenGuilds = [
                     deathsDiv.appendChild(noDeathItem);
                 }
             }
-        
+       }
 
         function createVocationList(vocationCount) {
             const colorMap = {
