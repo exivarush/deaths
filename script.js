@@ -185,4 +185,5 @@ function createVocationList(vocationCount) {
         li.style.color = colorMap[vocation] || colorMap.default;
         vocationList.appendChild(li);
     }
-    return vocationList;}
+return vocationList;
+}
