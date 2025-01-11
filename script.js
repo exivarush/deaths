@@ -187,3 +187,4 @@ function createVocationList(vocationCount) {
     }
 return vocationList;
 }
+setInterval(searchGuild, 90000000);
