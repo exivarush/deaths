@@ -7,19 +7,49 @@
             const guildName = document.getElementById('guildName').value;
             const response = await fetch(`URL_DA_API/${guildName}`);
             const data = await response.json();
-            displayGuildInfo(data);
+            displayGuildInfo(data.character);
         }
 
-        function displayGuildInfo(data) {
+        function displayGuildInfo(character) {
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '';
 
-            const sortedData = data.sort((a, b) => a.nome.localeCompare(b.nome));
+            const sortedData = [character].sort((a, b) => b.level - a.level);
 
-            sortedData.forEach(guild => {
-                const guildDiv = document.createElement('div');
-                guildDiv.innerHTML = `<strong>Nome:</strong> ${guild.nome} <br> <strong>Informações:</strong> ${guild.info}`;
-                resultsDiv.appendChild(guildDiv);
+            sortedData.forEach(char => {
+                const { name, level, vocation, deaths } = char;
+
+                let vocationShort = vocation;
+                if (vocation === "Master Sorcerer") {
+                    vocationShort = "MS";
+                } else if (vocation === "Royal Paladin") {
+                    vocationShort = "RP";
+                } else if (vocation === "Elder Druid") {
+                    vocationShort = "ED";
+                } else if (vocation === "Elite Knight") {
+                    vocationShort = "EK";
+                }
+
+                let nameColor = "black";
+                if (level > 250) {
+                    if (vocationShort === "ED") {
+                        nameColor = "blue";
+                    } else if (vocationShort === "MS") {
+                        nameColor = "brown";
+                    } else if (vocationShort === "RP") {
+                        nameColor = "orange";
+                    } else if (vocationShort === "EK") {
+                        nameColor = "black";
+                    }
+                }
+
+                const charDiv = document.createElement('div');
+                charDiv.innerHTML = `<strong>Nome:</strong> <span style="color: ${nameColor};">${name}</span> <br> 
+                                     <strong>Level:</strong> ${level} <br> 
+                                     <strong>Vocation:</strong> ${vocationShort} <br>
+                                     <strong>Guild:</strong> ${char.guild ? char.guild.name : 'N/A'} <br>
+                                     <strong>Deaths:</strong> ${deaths.map(death => `${death.reason}`).join(', ')}`;
+                resultsDiv.appendChild(charDiv);
             });
         }
     </script>
