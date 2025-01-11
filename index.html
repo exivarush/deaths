@@ -5,7 +5,7 @@
     <script>
         async function searchGuild() {
             const guildName = document.getElementById('guildName').value;
-            const response = await fetch(`URL_DA_API/${guildName}`);
+            const response = await fetch(`https://api.tibiadata.com/v4/guild/${encodeURIComponent(guildName)}`);
             const data = await response.json();
             displayGuildInfo(data.character);
         }
