@@ -1,20 +1,61 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Pesquisa de Mortes</title>
-    
-</head>
-<body>
-    <h1>Pesquisa de Guild</h1>
-    <input type="text" id="guildName" placeholder="Nome da Guild"><br>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guild Search</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      input,
+      button {
+        padding: 10px;
+        margin: 5px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        padding: 5px;
+        border-bottom: 1px solid #ccc;
+      }
+            
+    </style>
+  </head>
+  <body>
+    <h1>Search Guild Members</h1>
+    <label for="guildName">Nome da guild:</label>
+    <input type="text" id="guildName" placeholder="Digite o nome da guild" />
+    <button onclick="searchGuild()">Buscar</button>
+     
+    <h2>
+      Resultados:
+      <p id="onlineCount"></p>
+    </h2>
+    <h1>Filter Guild Deaths</h1>
     <label for="minLevel">Nível mínimo:</label>
-    <input type="number" id="minLevel"><br>
+    <input type="number" id="minLevel" placeholder="Digite o nível mínimo" />
     <label for="vocation">Vocação:</label>
-    <input type="text" id="vocation" placeholder="MS, RP, ED, EK, ..."><br>
-    <button onclick="searchGuild()">Pesquisar</button>
-    <div id="results">
-        <p id="onlineCount">0 membros online</p>
-        <ul id="resultList"></ul>
-    </div>
-</body>
+    <select id="vocation">
+        <option value="">Todas</option>
+        <option value="Knight">Knight</option>
+        <option value="Elite Knight">Elite Knight</option>
+        <option value="Sorcerer">Sorcerer</option>
+        <option value="Master Sorcerer">Master Sorcerer</option>
+        <option value="Druid">Druid</option>
+        <option value="Elder Druid">Elder Druid</option>
+        <option value="Paladin">Paladin</option>
+        <option value="Royal Paladin">Royal Paladin</option>
+    </select>
+    <button onclick="fetchAndFilterMembers()">Buscar</button>
+    <h2>Resultados:</h2>
+    <ul id="resultList"></ul>
+   
+    <ol id="resultList"></ol>
+  </body>
+  <script src="script.js"></script>
+  
 </html>
