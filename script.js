@@ -107,7 +107,7 @@ const forbiddenGuilds = [
             try { const response = await fetch(apiUrl); if (!response.ok) { throw new Error("Erro ao buscar dados da API"); } const data = await response.json(); console.log(data); 
 // Processar os dados conforme necessário } catch (error) { console.error("Erro:", error); alert("Não foi possível buscar os dados. Verifique o console para mais detalhes."); 
                 
-            } 
+            
         }
             const deathDiv = document.createElement("ul");
             listItem.appendChild(deathsDiv);
