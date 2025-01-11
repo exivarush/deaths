@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pesquisa de Guild</title>
+    <script>
+        async function searchGuild() {
+            const guildName = document.getElementById('guildName').value;
+            const response = await fetch(`URL_DA_API/${guildName}`);
+            const data = await response.json();
+            displayGuildInfo(data);
+        }
+
+        function displayGuildInfo(data) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            const sortedData = data.sort((a, b) => a.nome.localeCompare(b.nome));
+
+            sortedData.forEach(guild => {
+                const guildDiv = document.createElement('div');
+                guildDiv.innerHTML = `<strong>Nome:</strong> ${guild.nome} <br> <strong>Informações:</strong> ${guild.info}`;
+                resultsDiv.appendChild(guildDiv);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Pesquisa de Guild</h1>
+    <input type="text" id="guildName" placeholder="Nome da Guild">
+    <button onclick="searchGuild()">Pesquisar</button>
+    <div id="results"></div>
+</body>
+</html>
