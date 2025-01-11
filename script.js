@@ -135,8 +135,7 @@ function fetchDeaths(member, listItem) {
         const now = new Date();
         const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
         const recentDeaths = deaths.filter(death => new Date(death.time) >= twoDaysAgo);
-
-       function processMembers(members) {
+                function processMembers(members) {
     const resultList = document.getElementById("resultList");
 
     members.forEach(member => {
@@ -147,7 +146,6 @@ function fetchDeaths(member, listItem) {
         fetchDeaths(member, listItem); // Passando `listItem` como argumento para `fetchDeaths`
     });
 }
-
 function fetchDeaths(member, listItem) {
     if (member.level > 250) {
         const deathsDiv = document.createElement("ul");
