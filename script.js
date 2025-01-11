@@ -136,6 +136,27 @@ function fetchDeaths(member, listItem) {
         const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
         const recentDeaths = deaths.filter(death => new Date(death.time) >= twoDaysAgo);
 
+       function processMembers(members) {
+    const resultList = document.getElementById("resultList");
+
+    members.forEach(member => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `Name: ${member.name} | Level: ${member.level}`;
+        resultList.appendChild(listItem);
+
+        fetchDeaths(member, listItem); // Passando `listItem` como argumento para `fetchDeaths`
+    });
+}
+
+function fetchDeaths(member, listItem) {
+    if (member.level > 250) {
+        const deathsDiv = document.createElement("ul");
+        listItem.appendChild(deathsDiv);
+
+        const now = new Date();
+        const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
+        const recentDeaths = member.deaths.filter(death => new Date(death.time) >= twoDaysAgo);
+
         if (recentDeaths.length > 0) {
             recentDeaths.forEach(death => {
                 const deathItem = document.createElement("li");
@@ -150,27 +171,21 @@ function fetchDeaths(member, listItem) {
     }
 }
 
-                } else {
-                    const noDeathItem = document.createElement("li");
-                    noDeathItem.textContent = "Nenhuma morte nas últimas 48 horas";
-                    deathsDiv.appendChild(noDeathItem);
-                }
-            }
-       function createVocationList(vocationCount) {
-            const colorMap = {
-                RP: "orange",
-                MS: "red",
-                ED: "green",
-                EK: "black",
-                default: "gray",
-            };
-            const vocationList = document.createElement("ul");
+function createVocationList(vocationCount) {
+    const colorMap = {
+        RP: "orange",
+        MS: "red",
+        ED: "green",
+        EK: "black",
+        default: "gray",
+    };
+    const vocationList = document.createElement("ul");
 
-            for (const [vocation, count] of Object.entries(vocationCount)) {
-                const li = document.createElement("li");
-                li.textContent = `${vocation}: ${count}`;
-                li.style.color = colorMap[vocation] || colorMap.default;
-                vocationList.appendChild(li);
-            }
-            return vocationList;
-        }
+    for (const [vocation, count] of Object.entries(vocationCount)) {
+        const li = document.createElement("li");
+        li.textContent = `${vocation}: ${count}`;
+        li.style.color = colorMap[vocation] || colorMap.default;
+        vocationList.appendChild(li);
+    }
+    return vocationList;
+}
