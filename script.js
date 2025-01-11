@@ -19,7 +19,7 @@ const forbiddenGuilds = [
 
             try {
                 const response = await fetch(
-                    `https://api.tibiadata.com/v4/character/${encodeURIComponent(guildName)}`
+                    `https://api.tibiadata.com/v4/guild/${encodeURIComponent(guildName)}`
                 );
 
                 if (!response.ok) {
