@@ -102,7 +102,9 @@ const forbiddenGuilds = [
             return `<span style="color: ${color}; font-weight: bold;">Name: ${member.name} | ${vocationAbbreviation} - LVL: ${member.level}</span>`;
         }
 
-        async function fetchDeath(member, listItem) {
+        async function searchDeaths(level, vocation) { const apiUrl = `https://api.tibiadata.com/v4/characters/deaths?level=${level}&vocation=${vocation}`; 
+            try { const response = await fetch(apiUrl); if (!response.ok) { throw new Error("Erro ao buscar dados da API"); } const data = await response.json(); console.log(data); 
+// Processar os dados conforme necessário } catch (error) { console.error("Erro:", error); alert("Não foi possível buscar os dados. Verifique o console para mais detalhes."); } }
             const deathDiv = document.createElement("ul");
             listItem.appendChild(deathsDiv);
 
