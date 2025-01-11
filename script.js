@@ -37,7 +37,7 @@ public class GuildSearchApp {
 
     private static void searchGuild() {
         String guildName = guildNameField.getText();
-        String apiUrl = "URL_DA_API/" + guildName; // Substitua pela URL real da API
+        String apiUrl = "https://api.tibiadata.com/v4/guild/" + guildName; // Substitua pela URL real da API
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
