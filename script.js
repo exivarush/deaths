@@ -33,10 +33,10 @@ async function consultarGuild() {
 
 function getVocationColor(vocation) {
     switch (vocation) {
-        case 'Royal Paladin': return 'orange';
-        case 'Elder Druid': return 'blue';
-        case 'Elite Knight': return 'black';
-        case 'Master Sorcerer': return 'brown';
+        case 'RP': return 'orange';
+        case 'ED': return 'blue';
+        case 'EK': return 'black';
+        case 'MS': return 'brown';
         default: return 'black';
     }
 }
@@ -49,10 +49,10 @@ async function filtrarMortes() {
     mortes.innerHTML = '';
 
     const contadoresMortes = {
-        'Royal Paladin': 0,
-        'Elder Druid': 0,
-        'Elite Knight': 0,
-        'Master Sorcerer': 0
+        'RP': 0,
+        'ED': 0,
+        'EK': 0,
+        'MS': 0
     };
 
     for (let i = 0; i < resultados.length; i++) {
