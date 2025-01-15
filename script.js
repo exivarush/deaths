@@ -7,12 +7,7 @@ async function consultarGuild() {
     const membros = data.guild.members;
     const resultados = document.getElementById('resultados');
     let totalOnline = 0;
-const forbiddenGuilds = [
-  "Honbraland Encore",
-  "Ourobra Encore",
-  "Rasteibra Encore",
-];
-   
+
     resultados.innerHTML = '';
 document.getElementById('onlineCount').innerHTML = `
         <p>Total Online: ${totalOnline}</p>
