@@ -11,19 +11,9 @@ async function consultarGuild() {
         .forEach(membro => {
             const div = document.createElement('div');
             div.className = `${membro.vocation.replace(' ', '')} bold`;
-            div.innerHTML = `<span style="color: ${getVocationColor(membro.vocation)}; font-weight: bold;">${membro.name} - ${membro.level} - ${membro.vocation.replace('Royal Paladin', 'RP').replace('Elder Druid', 'ED').replace('Elite Knight', 'EK').replace('Master Sorcerer', 'MS')}</span>`;
+            div.textContent = `${membro.name} - ${membro.level} - ${membro.vocation.replace('Royal Paladin', 'RP').replace('Elder Druid', 'ED').replace('Elite Knight', 'EK').replace('Master Sorcerer', 'MS')}`;
             resultados.appendChild(div);
         });
-}
-
-function getVocationColor(vocation) {
-    switch (vocation) {
-        case 'Royal Paladin': return 'orange';
-        case 'Elder Druid': return 'blue';
-        case 'Elite Knight': return 'black';
-        case 'Master Sorcerer': return 'brown';
-        default: return 'black';
-    }
 }
 
 async function filtrarMortes() {
@@ -47,7 +37,7 @@ async function filtrarMortes() {
 
             mortesPersonagem.forEach(morte => {
                 const div = document.createElement('div');
-                div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - Level ${morte.level} - ${morte.reason}</span>`;
+                div.textContent = `${nome} - Level ${morte.level} - ${morte.reason}`;
                 mortes.appendChild(div);
             });
         }
