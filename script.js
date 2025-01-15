@@ -5,9 +5,10 @@ async function consultarGuild() {
     const membros = data.guild.members;
     const resultados = document.getElementById('resultados');
     let totalOnline = 0;
-
+   
     resultados.innerHTML = '';
-document.getElementById('onlineCount').innerHTML = `
+
+    document.getElementById('onlineCount').innerHTML = `
         <p>Total Online: ${totalOnline}</p>
         <p>Royal Paladin: ${contadores['Royal Paladin']}</p>
         <p>Elder Druid: ${contadores['Elder Druid']}</p>
@@ -20,7 +21,8 @@ document.getElementById('onlineCount').innerHTML = `
         'Elite Knight': 0,
         'Master Sorcerer': 0
     };
- 
+
+    
 
     membros.filter(membro => membro.status === 'online')
         .sort((a, b) => b.level - a.level)
@@ -33,7 +35,7 @@ document.getElementById('onlineCount').innerHTML = `
             totalOnline++;
         });
 
-    }
+}
 
 function getVocationColor(vocation) {
     switch (vocation) {
@@ -53,13 +55,13 @@ async function filtrarMortes() {
     mortes.innerHTML = '';
 
     const contadoresMortes = {
-        'Royal Paladin': 0,
-        'Elder Druid': 0,
-        'Elite Knight': 0,
-        'Master Sorcerer': 0
+        'RP': 0,
+        'ED': 0,
+        'EK': 0,
+        'MS': 0
     };
 
-   // const contadoresPorNome = {};
+    //const contadoresPorNome = {};
 
     for (let i = 0; i < resultados.length; i++) {
         const membro = resultados[i].textContent.split(' - ');
@@ -74,14 +76,15 @@ async function filtrarMortes() {
 
             mortesPersonagem.forEach(morte => {
                 const div = document.createElement('div');
+                div.innerHTML = `<span style="color: ${getVocationColor(membro.vocation)}; font-weight: bold;">${membro.name} - ${membro.level} - ${membro.vocation.replace('Royal Paladin', 'RP').replace('Elder Druid', 'ED').replace('Elite Knight', 'EK').replace('Master Sorcerer', 'MS')}</span>`;
                 div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
                 contadoresMortes[vocacao]++;
-               // if (!contadoresPorNome[nome]) {
-                //    contadoresPorNome[nome] = 0;
-               // }
-              //  contadoresPorNome[nome]++;
-            });
+         //       if (!contadoresPorNome[nome]) {
+          //          contadoresPorNome[nome] = 0;
+          //      }
+           //     contadoresPorNome[nome]++;
+        //    });
         }
     }
 
@@ -104,22 +107,22 @@ async function filtrarMortes() {
     `;
     mortes.appendChild(tabelaMortes);
 
-   // const tabelaPorNome = document.createElement('table');
-   // tabelaPorNome.innerHTML = `
-   //     <thead>
-    //        <tr>
-    //            <th>Nome</th>
-    //            <th>Mortes</th>
-   //         </tr>
+//    const tabelaPorNome = document.createElement('table');
+//    tabelaPorNome.innerHTML = `
+//        <thead>
+  //          <tr>
+   //             <th>Nome</th>
+     //           <th>Mortes</th>
+    //        </tr>
   //      </thead>
-  //      <tbody>
+   //     <tbody>
      //       ${Object.keys(contadoresPorNome).map(nome => `
      //           <tr>
      //               <td>${nome}</td>
-     //               <td>${contadoresPorNome[nome]}</td>
-   //             </tr>
-  //          `).join('')}
-//        </tbody>
-//   `;
+      //              <td>${contadoresPorNome[nome]}</td>
+     //           </tr>
+    //        `).join('')}
+   //     </tbody>
+//    `;
 //    mortes.appendChild(tabelaPorNome);
 }
