@@ -1,3 +1,9 @@
+const forbiddenGuilds = [
+  "Honbraland Encore",
+  "Ourobra Encore",
+  "Rasteibra Encore",
+];
+
 async function consultarGuild() {
     const guildName = document.getElementById('guildName').value.toLowerCase();
     const response = await fetch(`https://api.tibiadata.com/v4/guild/${encodeURIComponent(guildName)}`);
@@ -7,7 +13,13 @@ async function consultarGuild() {
     let totalOnline = 0;
    
     resultados.innerHTML = '';
-
+document.getElementById('onlineCount').innerHTML = `
+        <p>Total Online: ${totalOnline}</p>
+        <p>Royal Paladin: ${contadores['Royal Paladin']}</p>
+        <p>Elder Druid: ${contadores['Elder Druid']}</p>
+        <p>Elite Knight: ${contadores['Elite Knight']}</p>
+        <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
+    `;
     const contadores = {
         'Royal Paladin': 0,
         'Elder Druid': 0,
@@ -27,14 +39,7 @@ async function consultarGuild() {
             totalOnline++;
         });
 
-    document.getElementById('onlineCount').innerHTML = `
-        <p>Total Online: ${totalOnline}</p>
-        <p>Royal Paladin: ${contadores['Royal Paladin']}</p>
-        <p>Elder Druid: ${contadores['Elder Druid']}</p>
-        <p>Elite Knight: ${contadores['Elite Knight']}</p>
-        <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
-    `;
-}
+    }
 
 function getVocationColor(vocation) {
     switch (vocation) {
