@@ -14,6 +14,8 @@ async function consultarGuild() {
         'Master Sorcerer': 0
     };
 
+    let totalOnline = 0;
+
     membros.filter(membro => membro.status === 'online')
         .sort((a, b) => b.level - a.level)
         .forEach(membro => {
@@ -22,17 +24,17 @@ async function consultarGuild() {
             div.innerHTML = `<span style="color: ${getVocationColor(membro.vocation)}; font-weight: bold;">${membro.name} - ${membro.level} - ${membro.vocation.replace('Royal Paladin', 'RP').replace('Elder Druid', 'ED').replace('Elite Knight', 'EK').replace('Master Sorcerer', 'MS')}</span>`;
             resultados.appendChild(div);
             contadores[membro.vocation]++;
-
+            totalOnline++;
         });
 
     document.getElementById('onlineCount').innerHTML = `
+        <p>Total Online: ${totalOnline}</p>
         <p>Royal Paladin: ${contadores['Royal Paladin']}</p>
         <p>Elder Druid: ${contadores['Elder Druid']}</p>
         <p>Elite Knight: ${contadores['Elite Knight']}</p>
         <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
     `;
 }
-
 
 function getVocationColor(vocation) {
     switch (vocation) {
@@ -51,14 +53,14 @@ async function filtrarMortes() {
     const mortes = document.getElementById('mortes');
     mortes.innerHTML = '';
 
-   const contadoresMortes = {
-       'RP': 0,
-       'ED': 0,
-       'EK': 0,
-       'MS': 0
+    const contadoresMortes = {
+        'RP': 0,
+        'ED': 0,
+        'EK': 0,
+        'MS': 0
     };
 
-   // const contadoresPorNome = {};
+    const contadoresPorNome = {};
 
     for (let i = 0; i < resultados.length; i++) {
         const membro = resultados[i].textContent.split(' - ');
@@ -75,51 +77,50 @@ async function filtrarMortes() {
                 const div = document.createElement('div');
                 div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
-             contadoresMortes[vocacao]++;
-              //if (!contadoresPorNome[nome]) {
-                    //contadoresPorNome[nome] = 0;
-                //}
-           //     contadoresPorNome[nome]++;
+                contadoresMortes[vocacao]++;
+               // if (!contadoresPorNome[nome]) {
+                //    contadoresPorNome[nome] = 0;
+               // }
+              //  contadoresPorNome[nome]++;
             });
         }
     }
 
     const tabelaMortes = document.createElement('table');
-  tabelaMortes.innerHTML = `
+    tabelaMortes.innerHTML = `
         <thead>
-           <tr>
-               <th>Vocação</th>
-               <th>Mortes</th>
-           </tr>
-       </thead>
-       <tbody>
-           ${Object.keys(contadoresMortes).map(vocacao => `
-               <tr>
-                   <td>${vocacao}</td>
-                   <td>${contadoresMortes[vocacao]}</td>
-               </tr>
-           `).join('')}
-       </tbody>
+            <tr>
+                <th>Vocação</th>
+                <th>Mortes</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${Object.keys(contadoresMortes).map(vocacao => `
+                <tr>
+                    <td>${vocacao}</td>
+                    <td>${contadoresMortes[vocacao]}</td>
+                </tr>
+            `).join('')}
+        </tbody>
     `;
-   mortes.appendChild(tabelaMortes);
+    mortes.appendChild(tabelaMortes);
 
    // const tabelaPorNome = document.createElement('table');
-  //  tabelaPorNome.innerHTML = `
-    //    <thead>
-       //     <tr>
-        //        <th>Nome</th>
-        //        <th>Mortes</th>
-      //      </tr>
-    //    </thead>
-    //    <tbody>
-       //     ${Object.keys(contadoresPorNome).map(nome => `
-          //      <tr>
-            //        <td>${nome}</td>
-            //        <td>${contadoresPorNome[nome]}</td>
-          //      </tr>
-        //    `).join('')}
-  //      </tbody>
-//    `;
+   // tabelaPorNome.innerHTML = `
+   //     <thead>
+    //        <tr>
+    //            <th>Nome</th>
+    //            <th>Mortes</th>
+   //         </tr>
+  //      </thead>
+  //      <tbody>
+     //       ${Object.keys(contadoresPorNome).map(nome => `
+     //           <tr>
+     //               <td>${nome}</td>
+     //               <td>${contadoresPorNome[nome]}</td>
+   //             </tr>
+  //          `).join('')}
+//        </tbody>
+//   `;
 //    mortes.appendChild(tabelaPorNome);
 }
-
