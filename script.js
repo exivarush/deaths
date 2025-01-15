@@ -24,10 +24,10 @@ async function consultarGuild() {
         });
 
     document.getElementById('onlineCount').innerHTML = `
-        <p>Royal Paladin: ${contadores['Royal Paladin']}</p>
-        <p>Elder Druid: ${contadores['Elder Druid']}</p>
-        <p>Elite Knight: ${contadores['Elite Knight']}</p>
-        <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
+        <p>Royal Paladin: ${contadores['RP']}</p>
+        <p>Elder Druid: ${contadores['ED']}</p>
+        <p>Elite Knight: ${contadores['EK']}</p>
+        <p>Master Sorcerer: ${contadores['MS']}</p>
     `;
 }
 
@@ -49,10 +49,10 @@ async function filtrarMortes() {
     mortes.innerHTML = '';
 
     const contadoresMortes = {
-        'Royal Paladin': 0,
-        'Elder Druid': 0,
-        'Elite Knight': 0,
-        'Master Sorcerer': 0
+        'RP': 0,
+        'ED': 0,
+        'EK': 0,
+        'MS': 0
     };
 
     for (let i = 0; i < resultados.length; i++) {
@@ -68,7 +68,7 @@ async function filtrarMortes() {
 
             mortesPersonagem.forEach(morte => {
                 const div = document.createElement('div');
-                div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${morte.reason} - ${new Date(morte.time).toLocaleString()}</span>`;
+                div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
                 contadoresMortes[vocacao]++;
             });
