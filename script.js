@@ -24,19 +24,19 @@ async function consultarGuild() {
         });
 
     document.getElementById('onlineCount').innerHTML = `
-        <p>Royal Paladin: ${contadores['RP']}</p>
-        <p>Elder Druid: ${contadores['ED']}</p>
-        <p>Elite Knight: ${contadores['EK']}</p>
-        <p>Master Sorcerer: ${contadores['MS']}</p>
+        <p>Royal Paladin: ${contadores['Royal Paladin']}</p>
+        <p>Elder Druid: ${contadores['Elder Druid']}</p>
+        <p>Elite Knight: ${contadores['Elite Knight']}</p>
+        <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
     `;
 }
 
 function getVocationColor(vocation) {
     switch (vocation) {
-        case 'RP': return 'orange';
-        case 'ED': return 'blue';
-        case 'EK': return 'black';
-        case 'MS': return 'brown';
+        case 'Royal Paladin': return 'orange';
+        case 'Elder Druid': return 'blue';
+        case 'Elite Knight': return 'black';
+        case 'Master Sorcerer': return 'brown';
         default: return 'black';
     }
 }
@@ -47,7 +47,15 @@ async function filtrarMortes() {
     const resultados = document.getElementById('resultados').children;
     const mortes = document.getElementById('mortes');
     mortes.innerHTML = '';
-
+    
+function getVocationColor(vocation) {
+    switch (vocation) {
+        case 'RP': return 'orange';
+        case 'ED': return 'blue';
+        case 'EK': return 'black';
+        case 'MS': return 'brown';
+        default: return 'black';
+    }
     const contadoresMortes = {
         'RP': 0,
         'ED': 0,
@@ -68,7 +76,7 @@ async function filtrarMortes() {
 
             mortesPersonagem.forEach(morte => {
                 const div = document.createElement('div');
-                div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${new Date(morte.time) - ${nome} - ${vocacao} - Level ${morte.level} - ${morte.reason}.toLocaleString()}</span>`;
+                div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${new Date(morte.time).toLocaleString()} - ${nome} - ${vocacao} - Level ${morte.level} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
                 contadoresMortes[vocacao]++;
             });
