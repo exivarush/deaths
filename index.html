@@ -1,61 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guild Search</title>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Guild</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
-      input,
-      button {
-        padding: 10px;
-        margin: 5px;
-      }
-      ul {
-        list-style-type: none;
-        padding: 0;
-      }
-      li {
-        padding: 5px;
-        border-bottom: 1px solid #ccc;
-      }
-            
+        .RP { color: orange; }
+        .ED { color: blue; }
+        .EK { color: black; }
+        .MS { color: brown; }
     </style>
-  </head>
-  <body>
-    <h1>Search Guild</h1>
-    <label for="guildName">Nome da guild:</label>
-    <input type="text" id="guildName" placeholder="Digite o nome da guild" />
-    <button onclick="searchGuild()">Buscar</button>
-     
-    <h2>
-      Resultados:
-      <p id="onlineCount"></p>
-    </h2>
-    <h1>Filter Guild Deaths</h1>
-    <label for="minLevel">Nível mínimo:</label>
-    <input type="number" id="minLevel" placeholder="Digite o nível mínimo" />
-    <label for="vocation">Vocação:</label>
-    <select id="vocation">
-        <option value="">Todas</option>
-        <option value="Knight">Knight</option>
-        <option value="Elite Knight">Elite Knight</option>
-        <option value="Sorcerer">Sorcerer</option>
-        <option value="Master Sorcerer">Master Sorcerer</option>
-        <option value="Druid">Druid</option>
-        <option value="Elder Druid">Elder Druid</option>
-        <option value="Paladin">Paladin</option>
-        <option value="Royal Paladin">Royal Paladin</option>
-    </select>
-    <button onclick="searchDeaths()">Buscar</button>
-    <h2>Resultados:</h2>
-    <ul id="resultList"></ul>
-   
-    <ol id="resultList"></ol>
-  </body>
-  <script src="script.js"></script>
-  
+</head>
+<body>
+    <h1>Consulta de Guild</h1>
+    <input type="text" id="guildName" placeholder="Nome da Guild">
+    <button onclick="fetchGuildData()">Consultar</button>
+    <table id="guildTable">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Vocação</th>
+                <th>Level</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div id="onlineCount"></div>
+    <script src="script.js"></script>
+</body>
 </html>
