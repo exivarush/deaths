@@ -55,6 +55,8 @@ async function filtrarMortes() {
         'MS': 0
     };
 
+    const contadoresPorNome = {};
+
     for (let i = 0; i < resultados.length; i++) {
         const membro = resultados[i].textContent.split(' - ');
         const nome = membro[0];
@@ -71,7 +73,11 @@ async function filtrarMortes() {
                 div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
                 contadoresMortes[vocacao]++;
-                  });
+                if (!contadoresPorNome[nome]) {
+                    contadoresPorNome[nome] = 0;
+                }
+                contadoresPorNome[nome]++;
+            });
         }
     }
 
@@ -94,4 +100,23 @@ async function filtrarMortes() {
     `;
     mortes.appendChild(tabelaMortes);
 
+    const tabelaPorNome = document.createElement('table');
+    tabelaPorNome.innerHTML = `
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Mortes</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${Object.keys(contadoresPorNome).map(nome => `
+                <tr>
+                    <td>${nome}</td>
+                    <td>${contadoresPorNome[nome]}</td>
+                </tr>
+            `).join('')}
+        </tbody>
+    `;
+    mortes.appendChild(tabelaPorNome);
 }
+
