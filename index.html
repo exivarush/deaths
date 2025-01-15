@@ -17,6 +17,17 @@
     <button onclick="consultarGuild()">Consultar</button>
     <div id="resultados"></div>
     <div id="onlineCount"></div>
+    <h2>Filtro de Mortes</h2>
+    <input type="number" id="levelMin" placeholder="Level Mínimo">
+    <input type="number" id="levelMax" placeholder="Level Máximo">
+    <select id="vocation">
+        <option value="">Todas as Vocações</option>
+        <option value="RP">Royal Paladin</option>
+        <option value="ED">Elder Druid</option>
+        <option value="EK">Elite Knight</option>
+        <option value="MS">Master Sorcerer</option>
+    </select>
+    <button onclick="filtrarMortes()">Filtrar Mortes</button>
     <div id="mortes"></div>
     <script src="script.js"></script>
 </body>
