@@ -4,7 +4,7 @@ async function consultarGuild() {
     const data = await response.json();
     const membros = data.guild.members;
     const resultados = document.getElementById('resultados');
-    let onlineCount = 0;
+   
     resultados.innerHTML = '';
 
     const contadores = {
@@ -32,13 +32,7 @@ async function consultarGuild() {
         <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
     `;
 }
- onlineCount++;
-          resultList.appendChild(li);
-          const onlineCountElement = document.getElementById("onlineCount");
-          onlineCountElement.textContent = `${onlineCount} membros online`;
-        } else {
-          li.textContent = "Não há membros online.";
-        }
+
 
 function getVocationColor(vocation) {
     switch (vocation) {
