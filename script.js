@@ -6,6 +6,22 @@ async function consultarGuild() {
     const resultados = document.getElementById('resultados');
     resultados.innerHTML = '';
 
+    membros.filter(membro => membro.status === 'online')
+        .sort((a, b) => b.level - a.level)
+        .forEach(membro => {
+            const div = document.createElement('div');
+            div.className = `${membro.vocation.replace(' ', '')} bold`;
+            div.textContent = `${membro.name} - ${membro.level} - ${membro.vocation.replace('Royal Paladin', 'RP').replace('Elder Druid', 'ED').replace('Elite Knight', 'EK').replace('Master Sorcerer', 'MS')}`;
+            resultados.appendChild(div);
+        });
+async function consultarGuild() {
+    const guildName = document.getElementById('guildName').value.toLowerCase();
+    const response = await fetch(`https://api.tibiadata.com/v4/guild/${encodeURIComponent(guildName)}`);
+    const data = await response.json();
+    const membros = data.guild.members;
+    const resultados = document.getElementById('resultados');
+    resultados.innerHTML = '';
+
     const contadores = {
         'Royal Paladin': 0,
         'Elder Druid': 0,
