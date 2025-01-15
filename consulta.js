@@ -6,14 +6,39 @@ async function consultarGuild() {
     const resultados = document.getElementById('resultados');
     resultados.innerHTML = '';
 
+    const contadores = {
+        'Royal Paladin': 0,
+        'Elder Druid': 0,
+        'Elite Knight': 0,
+        'Master Sorcerer': 0
+    };
+
     membros.filter(membro => membro.status === 'online')
         .sort((a, b) => b.level - a.level)
         .forEach(membro => {
             const div = document.createElement('div');
             div.className = `${membro.vocation.replace(' ', '')} bold`;
-            div.textContent = `${membro.name} - ${membro.level} - ${membro.vocation.replace('Royal Paladin', 'RP').replace('Elder Druid', 'ED').replace('Elite Knight', 'EK').replace('Master Sorcerer', 'MS')}`;
+            div.innerHTML = `<span style="color: ${getVocationColor(membro.vocation)}; font-weight: bold;">${membro.name} - ${membro.level} - ${membro.vocation.replace('Royal Paladin', 'RP').replace('Elder Druid', 'ED').replace('Elite Knight', 'EK').replace('Master Sorcerer', 'MS')}</span>`;
             resultados.appendChild(div);
+            contadores[membro.vocation]++;
         });
+
+    document.getElementById('onlineCount').innerHTML = `
+        <p>Royal Paladin: ${contadores['Royal Paladin']}</p>
+        <p>Elder Druid: ${contadores['Elder Druid']}</p>
+        <p>Elite Knight: ${contadores['Elite Knight']}</p>
+        <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
+    `;
+}
+
+function getVocationColor(vocation) {
+    switch (vocation) {
+        case 'Royal Paladin': return 'orange';
+        case 'Elder Druid': return 'blue';
+        case 'Elite Knight': return 'black';
+        case 'Master Sorcerer': return 'brown';
+        default: return 'black';
+    }
 }
 
 async function filtrarMortes() {
@@ -23,6 +48,13 @@ async function filtrarMortes() {
     const resultados = document.getElementById('resultados').children;
     const mortes = document.getElementById('mortes');
     mortes.innerHTML = '';
+
+    const contadoresMortes = {
+        'Royal Paladin': 0,
+        'Elder Druid': 0,
+        'Elite Knight': 0,
+        'Master Sorcerer': 0
+    };
 
     for (let i = 0; i < resultados.length; i++) {
         const membro = resultados[i].textContent.split(' - ');
@@ -37,9 +69,29 @@ async function filtrarMortes() {
 
             mortesPersonagem.forEach(morte => {
                 const div = document.createElement('div');
-                div.textContent = `${nome} - Level ${morte.level} - ${morte.reason}`;
+                div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - Level ${morte.level} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
+                contadoresMortes[vocacao]++;
             });
         }
     }
+
+    const tabelaMortes = document.createElement('table');
+    tabelaMortes.innerHTML = `
+        <thead>
+            <tr>
+                <th>Vocação</th>
+                <th>Mortes</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${Object.keys(contadoresMortes).map(vocacao => `
+                <tr>
+                    <td>${vocacao}</td>
+                    <td>${contadoresMortes[vocacao]}</td>
+                </tr>
+            `).join('')}
+        </tbody>
+    `;
+    mortes.appendChild(tabelaMortes);
 }
