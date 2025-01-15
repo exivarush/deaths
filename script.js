@@ -1,5 +1,3 @@
-
-
 async function consultarGuild() {
     const guildName = document.getElementById('guildName').value.toLowerCase();
     const response = await fetch(`https://api.tibiadata.com/v4/guild/${encodeURIComponent(guildName)}`);
