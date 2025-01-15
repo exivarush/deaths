@@ -77,7 +77,7 @@ async function filtrarMortes() {
                 const div = document.createElement('div');
                 div.className = `${membro.vocation.replace(' ', '')} bold`;
                 div.innerHTML = `<span style="color: ${getVocationColor(membro.vocation)}; font-weight: bold;">${membro.name} - ${membro.level} - ${membro.vocation.replace('Royal Paladin', 'RP').replace('Elder Druid', 'ED').replace('Elite Knight', 'EK').replace('Master Sorcerer', 'MS')}</span>`;
-                div.innerHTML = `<span style="color: ${getVocationColor(membro.vocation)}; font-weight: bold;">${nome} - ${membro.vocation} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
+                div.innerHTML = `<span style="color: ${getVocationColor(membro.vocation)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
                 contadoresMortes[vocacao]++;
                 if (!contadoresPorNome[nome]) {
