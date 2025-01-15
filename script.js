@@ -75,7 +75,7 @@ async function filtrarMortes() {
 
             mortesPersonagem.forEach(morte => {
                 const div = document.createElement('div');
-                div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
+                div.innerHTML = `<span style="color: ${getVocationColor(membro.vocation)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
                 contadoresMortes[vocacao]++;
                 if (!contadoresPorNome[nome]) {
