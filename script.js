@@ -24,10 +24,10 @@ async function consultarGuild() {
         });
 
     document.getElementById('onlineCount').innerHTML = `
-        <p>Royal Paladin: ${contadores['Royal Paladin']}</p>
-        <p>Elder Druid: ${contadores['Elder Druid']}</p>
-        <p>Elite Knight: ${contadores['Elite Knight']}</p>
-        <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
+        <p>RP: ${contadores['Royal Paladin']}</p>
+        <p>ED: ${contadores['Elder Druid']}</p>
+        <p>EK: ${contadores['Elite Knight']}</p>
+        <p>MS: ${contadores['Master Sorcerer']}</p>
     `;
 }
 
@@ -71,6 +71,7 @@ async function filtrarMortes() {
                 div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
                 contadoresMortes[vocacao]++;
+                if (!contadoresPorNome[nome]) { contadoresPorNome[nome] = 0; } contadoresPorNome[nome]++;
             });
         }
     }
@@ -84,13 +85,32 @@ async function filtrarMortes() {
             </tr>
         </thead>
         <tbody>
-            ${Object.keys(contadoresMortes).map(nome => `
+            ${Object.keys(contadoresMortes).map(vocacao => `
                 <tr>
-                    <td>${nome}</td>
-                    <td>${contadoresMortes[nome]}</td>
+                    <td>${vocacao}</td>
+                    <td>${contadoresMortes[vocacao]}</td>
                 </tr>
             `).join('')}
         </tbody>
     `;
     mortes.appendChild(tabelaMortes);
+    
+    const tabelaPorNome = document.createElement('table');
+    tabelaPorNome.innerHTML = `
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Mortes</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${Object.keys(contadoresPorNome).map(nome => `
+                <tr>
+                    <td>${nome}</td>
+                    <td>${contadoresPorNome[nome]}</td>
+                </tr>
+            `).join('')}
+        </tbody>
+    `;
+    mortes.appendChild(tabelaPorNome);
 }
