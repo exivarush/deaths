@@ -38,3 +38,4 @@ function getVocationColor(vocation) {
         default: return 'black';
     }
 }
+setInterval(consultarGuild, 180000);
