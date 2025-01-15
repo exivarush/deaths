@@ -4,6 +4,7 @@ async function consultarGuild() {
     const data = await response.json();
     const membros = data.guild.members;
     const resultados = document.getElementById('resultados');
+    let onlineCount = 0;
     resultados.innerHTML = '';
 
     const contadores = {
@@ -21,6 +22,7 @@ async function consultarGuild() {
             div.innerHTML = `<span style="color: ${getVocationColor(membro.vocation)}; font-weight: bold;">${membro.name} - ${membro.level} - ${membro.vocation.replace('Royal Paladin', 'RP').replace('Elder Druid', 'ED').replace('Elite Knight', 'EK').replace('Master Sorcerer', 'MS')}</span>`;
             resultados.appendChild(div);
             contadores[membro.vocation]++;
+
         });
 
     document.getElementById('onlineCount').innerHTML = `
@@ -30,6 +32,13 @@ async function consultarGuild() {
         <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
     `;
 }
+ onlineCount++;
+          resultList.appendChild(li);
+          const onlineCountElement = document.getElementById("onlineCount");
+          onlineCountElement.textContent = `${onlineCount} membros online`;
+        } else {
+          li.textContent = "Não há membros online.";
+        }
 
 function getVocationColor(vocation) {
     switch (vocation) {
@@ -55,7 +64,7 @@ async function filtrarMortes() {
        'MS': 0
     };
 
-    const contadoresPorNome = {};
+   // const contadoresPorNome = {};
 
     for (let i = 0; i < resultados.length; i++) {
         const membro = resultados[i].textContent.split(' - ');
