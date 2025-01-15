@@ -7,10 +7,10 @@ async function consultarGuild() {
     resultados.innerHTML = '';
 
     const contadores = {
-        'Royal Paladin': 0,
-        'Elder Druid': 0,
-        'Elite Knight': 0,
-        'Master Sorcerer': 0
+        'RP': 0,
+        'ED': 0,
+        'EK': 0,
+        'MS': 0
     };
 
     membros.filter(membro => membro.status === 'online')
@@ -24,19 +24,19 @@ async function consultarGuild() {
         });
 
     document.getElementById('onlineCount').innerHTML = `
-        <p>Royal Paladin: ${contadores['RP']}</p>
-        <p>Elder Druid: ${contadores['ED']}</p>
-        <p>Elite Knight: ${contadores['EK']}</p>
-        <p>Master Sorcerer: ${contadores['MS']}</p>
+        <p>Royal Paladin: ${contadores['Royal Paladin']}</p>
+        <p>Elder Druid: ${contadores['Elder Druid']}</p>
+        <p>Elite Knight: ${contadores['Elite Knight']}</p>
+        <p>Master Sorcerer: ${contadores['Master Sorcerer']}</p>
     `;
 }
 
 function getVocationColor(vocation) {
     switch (vocation) {
-        case 'Royal Paladin': return 'orange';
-        case 'Elder Druid': return 'blue';
-        case 'Elite Knight': return 'black';
-        case 'Master Sorcerer': return 'brown';
+        case 'RP': return 'orange';
+        case 'ED': return 'blue';
+        case 'EK': return 'black';
+        case 'MS': return 'brown';
         default: return 'black';
     }
 }
@@ -84,10 +84,10 @@ async function filtrarMortes() {
             </tr>
         </thead>
         <tbody>
-            ${Object.keys(contadoresMortes).map(vocacao => `
+            ${Object.keys(contadoresMortes).map(nome => `
                 <tr>
-                    <td>${vocacao}</td>
-                    <td>${contadoresMortes[vocacao]}</td>
+                    <td>${nome}</td>
+                    <td>${contadoresMortes[nome]}</td>
                 </tr>
             `).join('')}
         </tbody>
