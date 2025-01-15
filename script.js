@@ -47,20 +47,12 @@ async function filtrarMortes() {
     const resultados = document.getElementById('resultados').children;
     const mortes = document.getElementById('mortes');
     mortes.innerHTML = '';
-    
-function getVocationColor(vocation) {
-    switch (vocation) {
-        case 'RP': return 'orange';
-        case 'ED': return 'blue';
-        case 'EK': return 'black';
-        case 'MS': return 'brown';
-        default: return 'black';
-    }
+
     const contadoresMortes = {
-        'RP': 0,
-        'ED': 0,
-        'EK': 0,
-        'MS': 0
+        'Royal Paladin': 0,
+        'Elder Druid': 0,
+        'Elite Knight': 0,
+        'Master Sorcerer': 0
     };
 
     for (let i = 0; i < resultados.length; i++) {
@@ -76,7 +68,7 @@ function getVocationColor(vocation) {
 
             mortesPersonagem.forEach(morte => {
                 const div = document.createElement('div');
-                div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${new Date(morte.time).toLocaleString()} - ${nome} - ${vocacao} - Level ${morte.level} - ${morte.reason}</span>`;
+                div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${morte.reason} - ${new Date(morte.time).toLocaleString()}</span>`;
                 mortes.appendChild(div);
                 contadoresMortes[vocacao]++;
             });
