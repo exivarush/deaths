@@ -2,6 +2,7 @@ async function consultarGuild() {
     const guildName = document.getElementById('guildName').value.toLowerCase();
     const levelMin = document.getElementById('levelMin').value;
     const vocation = document.getElementById('vocation').value;
+    const offlineOnly = document.getElementById('offlineOnly').checked;
     const response = await fetch(`https://api.tibiadata.com/v4/guild/${encodeURIComponent(guildName)}`);
     const data = await response.json();
     const membros = data.guild.members;
@@ -11,7 +12,7 @@ async function consultarGuild() {
     const membrosFiltrados = membros.filter(membro => 
         (levelMin === '' || membro.level >= levelMin) &&
         (vocation === '' || membro.vocation.replace(' ', '') === vocation) &&
-        membro.status === 'online'
+        (offlineOnly ? membro.status === 'offline' : membro.status === 'online')
     ).sort((a, b) => b.level - a.level);
 
     for (const membro of membrosFiltrados) {
