@@ -48,11 +48,11 @@ async function filtrarMortes() {
     const mortes = document.getElementById('mortes');
     mortes.innerHTML = '';
 
- //   const contadoresMortes = {
- //       'RP': 0,
- //       'ED': 0,
-//        'EK': 0,
-//        'MS': 0
+   const contadoresMortes = {
+       'RP': 0,
+       'ED': 0,
+       'EK': 0,
+       'MS': 0
     };
 
     const contadoresPorNome = {};
@@ -72,51 +72,51 @@ async function filtrarMortes() {
                 const div = document.createElement('div');
                 div.innerHTML = `<span style="color: ${getVocationColor(vocacao)}; font-weight: bold;">${nome} - ${vocacao} - Level ${morte.level} - ${new Date(morte.time).toLocaleString()} - ${morte.reason}</span>`;
                 mortes.appendChild(div);
-                //contadoresMortes[vocacao]++;
-               //if (!contadoresPorNome[nome]) {
+             contadoresMortes[vocacao]++;
+              //if (!contadoresPorNome[nome]) {
                     //contadoresPorNome[nome] = 0;
                 //}
-                contadoresPorNome[nome]++;
+           //     contadoresPorNome[nome]++;
             });
         }
     }
 
-   // const tabelaMortes = document.createElement('table');
-   // tabelaMortes.innerHTML = `
-     //   <thead>
+    const tabelaMortes = document.createElement('table');
+  tabelaMortes.innerHTML = `
+        <thead>
+           <tr>
+               <th>Vocação</th>
+               <th>Mortes</th>
+           </tr>
+       </thead>
+       <tbody>
+           ${Object.keys(contadoresMortes).map(vocacao => `
+               <tr>
+                   <td>${vocacao}</td>
+                   <td>${contadoresMortes[vocacao]}</td>
+               </tr>
+           `).join('')}
+       </tbody>
+    `;
+   mortes.appendChild(tabelaMortes);
+
+   // const tabelaPorNome = document.createElement('table');
+  //  tabelaPorNome.innerHTML = `
+    //    <thead>
        //     <tr>
-        //        <th>Vocação</th>
+        //        <th>Nome</th>
         //        <th>Mortes</th>
       //      </tr>
     //    </thead>
-     //   <tbody>
-        //    ${Object.keys(contadoresMortes).map(vocacao => `
-         //       <tr>
-          //          <td>${vocacao}</td>
-          //          <td>${contadoresMortes[vocacao]}</td>
-         //       </tr>
-      //      `).join('')}
-     //   </tbody>
-  //  `;
- //   mortes.appendChild(tabelaMortes);
-
-    const tabelaPorNome = document.createElement('table');
-    tabelaPorNome.innerHTML = `
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Mortes</th>
-            </tr>
-        </thead>
-        <tbody>
-            ${Object.keys(contadoresPorNome).map(nome => `
-                <tr>
-                    <td>${nome}</td>
-                    <td>${contadoresPorNome[nome]}</td>
-                </tr>
-            `).join('')}
-        </tbody>
-    `;
-    mortes.appendChild(tabelaPorNome);
+    //    <tbody>
+       //     ${Object.keys(contadoresPorNome).map(nome => `
+          //      <tr>
+            //        <td>${nome}</td>
+            //        <td>${contadoresPorNome[nome]}</td>
+          //      </tr>
+        //    `).join('')}
+  //      </tbody>
+//    `;
+//    mortes.appendChild(tabelaPorNome);
 }
 
