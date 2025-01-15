@@ -4,6 +4,7 @@ async function consultarGuild() {
     const data = await response.json();
     const membros = data.guild.members;
     const resultados = document.getElementById('resultados');
+    let totalOnline = 0;
    
     resultados.innerHTML = '';
 
@@ -13,8 +14,7 @@ async function consultarGuild() {
         'Elite Knight': 0,
         'Master Sorcerer': 0
     };
-
-    let totalOnline = 0;
+ 
 
     membros.filter(membro => membro.status === 'online')
         .sort((a, b) => b.level - a.level)
@@ -54,13 +54,13 @@ async function filtrarMortes() {
     mortes.innerHTML = '';
 
     const contadoresMortes = {
-        'RP': 0,
-        'ED': 0,
-        'EK': 0,
-        'MS': 0
+        'Royal Paladin': 0,
+        'Elder Druid': 0,
+        'Elite Knight': 0,
+        'Master Sorcerer': 0
     };
 
-    const contadoresPorNome = {};
+   // const contadoresPorNome = {};
 
     for (let i = 0; i < resultados.length; i++) {
         const membro = resultados[i].textContent.split(' - ');
