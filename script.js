@@ -10,10 +10,9 @@ async function consultarGuild() {
     resultados.innerHTML = '';
 
     const membrosFiltrados = membros.filter(membro => 
-        (levelMin === '' || membro.level >= levelMin) &&
-        (vocation === '' || membro.vocation.replace(' ', '') === vocation) &&
-        (offlineOnly ? membro.status === 'offline' : membro.status === 'online')
-    ).sort((a, b) => b.level - a.level);
+    (levelMin === '' || membro.level >= levelMin) &&
+    (vocation === '' || membro.vocation.replace(' ', '') === vocation) &&
+    (offlineOnly ? membro.status === 'offline' : membro.status === 'online')).sort((a, b) => b.level - a.level);
 
     for (const membro of membrosFiltrados) {
         const response = await fetch(`https://api.tibiadata.com/v4/character/${encodeURIComponent(membro.name)}`);
